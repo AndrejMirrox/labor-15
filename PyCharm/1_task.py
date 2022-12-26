@@ -25,9 +25,11 @@ def factorial_cache(n):
         return 1
     else:
         return n * factorial_cache(n - 1)
-print("Время обычной версии:")
-print(f'{timeit.timeit(lambda: factorial_iteration(200), number=10000)}, \n')
-print("Время рекурс. версии:")
-print(f'{timeit.timeit(lambda: factorial(200), number=10000)}, \n')
-print("Время рекурс. кеш. версии:")
-print(f'{timeit.timeit(lambda: factorial_cache(200), number=10000)}, \n')
+
+if __name__ == "__main__":
+    print("Время обычной версии:")
+    print(f'{timeit.timeit(lambda: factorial_iteration(200), number=10000)}, \n')
+    print("Время рекурс. версии:")
+    print(f'{timeit.timeit(lambda: factorial(200), number=10000)}, \n')
+    print("Время рекурс. кеш. версии:")
+    print(f'{timeit.timeit(lambda: factorial_cache(200), number=10000)}, \n')

@@ -1,139 +1,24 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+
 import sys
-from datetime import date
+
+sys.setrecursionlimit(30000)
 
 
-def add_man():
-    """
-    Добавление людей
-    """
-
-    name = input("Фамилия и инициалы? ")
-    post = input("Телефон? ")
-    year = input("Год рождения? ")
-    year = year.split(".")
-    year = date(int(year[0]), int(year[1]), int(year[2]))
-
-    # Создать словарь.
-    man = {
-        'name': name,
-        'tel': post,
-        'date': year,
-    }
-
-    # Добавить словарь в список.
-    return man
+def A(m, n):
+    if m == 0:
+        return n + 1
+    elif m > 0 and n == 0:
+        return A(m - 1, 1)
+    elif m > 0 and n > 0:
+        return A(m - 1, A(m, n - 1))
 
 
-def list_man(people):
-    """
-    Вывод людей
-    """
+if __name__ == "__main__":
 
-    line = '+-{}-+-{}-+-{}-+-{}-+'.format(
-        '-' * 4,
-        '-' * 30,
-        '-' * 20,
-        '-' * 12
-    )
-    print(line)
-    print(
-        '| {:^4} | {:^30} | {:^20} | {:^12} |'.format(
-            "№",
-            "Ф.И.О.",
-            "Телефон",
-            "Год рождения"
-        )
-    )
-    print(line)
-
-    for idx, man in enumerate(people, 1):
-        print(
-            '| {:>4} | {:<30} | {:<20} | {:>12} |'.format(
-                idx,
-                man.get('name', ''),
-                man.get('tel', ''),
-                str(man.get('date', 0))
-            )
-        )
-    print(line)
-
-
-def select_man(person):
-    """
-    Вывод конкретных людей
-    """
-
-    count = 0
-    for man in people:
-        if man.get('name', person).lower() == person.lower():
-            count += 1
-            line = '+-{}-+-{}-+-{}-+-{}-+'.format(
-                '-' * 4,
-                '-' * 30,
-                '-' * 20,
-                '-' * 12
-            )
-            print(line)
-            print(
-                '| {:^4} | {:^30} | {:^20} | {:^12} |'.format(
-                    "№",
-                    "Ф.И.О.",
-                    "Телефон",
-                    "Год рождения"
-                )
-            )
-            print(line)
-            print(
-                '| {:>4} | {:<30} | {:<20} | {:>12} |'.format(
-                    count,
-                    man.get('name', ''),
-                    man.get('tel', ''),
-                    str(man.get('date', 0))
-                )
-            )
-            print(line)
-
-    if count == 0:
-        print("Люди с заданным именем не найдены.")
-
-
-def help_man():
-    print("Список команд:\n")
-    print("add - добавить человека;")
-    print("list - вывести список людей;")
-    print("select <имя> - запросить людей с этим именем;")
-    print("help - отобразить справку;")
-    print("exit - завершить работу с программой.")
-
-
-if __name__ == '__main__':
-    # Список работников.
-    people = []
-
-    while True:
-        command = input(">>> ").lower()
-
-        if command == 'exit':
-            break
-
-        elif command == "add":
-           people.append(add_man())
-           if len(people) > 1:
-               people.sort(key=lambda item: item.get('tel', ''))
-
-        elif command == 'list':
-           list_man(people)
-
-        elif command.startswith('select'):
-            parts = command.split(' ', maxsplit=1)
-            period = parts[1]
-            select_man(period)
-
-        elif command == 'help':
-           help_man()
-
-        else:
-            print(f"Неизвестная команда {command}", file=sys.stderr)
+    in_m = int(input("Введите число m:"))
+    in_n = int(input("Введите число n:"))
+    result = A(in_m, in_n)
+    print(f"A({in_m}, {in_m}) = {result}")
