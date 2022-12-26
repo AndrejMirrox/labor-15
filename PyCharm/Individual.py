@@ -20,5 +20,4 @@ if __name__ == "__main__":
 
     in_m = int(input("Введите число m:"))
     in_n = int(input("Введите число n:"))
-    result = A(in_m, in_n)
-    print(f"A({in_m}, {in_m}) = {result}")
+    print(f"A({in_m}, {in_m}) = {A(in_m, in_n)}")
