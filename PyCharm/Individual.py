@@ -1,19 +1,19 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-import math
-
-def sum(*a):
-    if a:
-        min_i = a.index(min(a))
-        if min_i != len(a)-1:
-            return math.fsum(a[min_i+1:])
+def del1(type="even"):
+    def del2(b):
+        if type == 'even':
+            b = [num for idx, num  in enumerate(b) if num % 2 != 0]
+            return b
         else:
-            return "Дальше элементов нет"
-    else:
-        return "None"
+            b = [num for idx, num in enumerate(b) if num % 2 == 0]
+            return b
+    return del2
 
 
 if __name__ == "__main__":
-    print(f"Сумма аргуметов после мин.: {sum(42, 15, 33, 10, 12, 12, 11)}")
+    list = list(map(int, input("Введите список: ").split()))
+    com = input("Введите параметр функции: ")
+    print(f"Тест: {del1(com)(list)}")
 
