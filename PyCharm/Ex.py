@@ -1,15 +1,27 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-def fun1(a):
-    x = a * 3
 
-    def fun2(b):
-        nonlocal x
-        return b + x
-    return fun2
+def benchmark(func):
+    import time
+
+    def wrapper(*args, **kwargs):
+        start = time.time()
+        return_value = func(*args, **kwargs)
+        end = time.time()
+        print('[*] Время выполнения: {} секунд.'.format(end - start))
+        return return_value
+
+    return wrapper
 
 
-if __name__ == "__main__":
-    test_fun = fun1(4)
-    print(test_fun(6))
+@benchmark
+def fetch_webpage(url):
+    import requests
+    webpage = requests.get(url)
+    return webpage.text
+
+
+if __name__ == '__main__':
+    webpage = fetch_webpage('https://google.com')
+    print(webpage)
