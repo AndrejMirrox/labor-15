@@ -11,7 +11,7 @@ def decorator_func(func):
              'ю': '..--', 'я': '.-.-', ' ': '-···-'}
     def wrapper(text):
         text = func(text)
-        text = ''.join()
+        text = ''.join([morze.get(ch, '') for ch in text])
         return text
 
     return wrapper
